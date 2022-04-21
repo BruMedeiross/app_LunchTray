@@ -1,4 +1,4 @@
-Lunch Tray - Starter Code
+Lunch Tray (solved code)
 ==================================
 
 Starter code for the third independent project for Android Basics in Kotlin
@@ -26,3 +26,6 @@ Tips
 
 - Use the provided tests to ensure your app is running as expected
 - DO NOT ALTER THE PROVIDED TESTS
+
+
+
