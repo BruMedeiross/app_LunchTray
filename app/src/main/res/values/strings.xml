@@ -29,4 +29,8 @@
     <string name="order_summary">Order Summary</string>
     <string name="submit">Submit Order</string>
     <string name="submit_order">Order Submitted!</string>
+    <string name="order_details">Entrada: %1$s \n Acompanhamento: %2$s \n Adicionais: %3$s \n
+        Total: %4$s \n\n Thank you!</string>
+    <string name="new_order">Novo Pedido</string>
+
 </resources>

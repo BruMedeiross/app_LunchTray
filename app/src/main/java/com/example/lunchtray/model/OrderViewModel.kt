@@ -71,12 +71,18 @@ class OrderViewModel : ViewModel() {
     fun setEntree(entree: String) {
         // TODO: if _entree.value is not null, set the previous entree price to the current
         //  entree price.
+        previousEntreePrice = _entree.value?.price ?: 0.0
+
 
         // TODO: if _subtotal.value is not null subtract the previous entree price from the current
         //  subtotal value. This ensures that we only charge for the currently selected entree.
+        _subtotal.value = (_subtotal.value ?: 0.0) - previousEntreePrice
 
         // TODO: set the current entree value to the menu item corresponding to the passed in string
+        _entree.value = menuItems[entree]
+
         // TODO: update the subtotal to reflect the price of the selected entree.
+        updateSubtotal(menuItems[entree]?.price ?: 0.0)
     }
 
     /**
@@ -84,12 +90,15 @@ class OrderViewModel : ViewModel() {
      */
     fun setSide(side: String) {
         // TODO: if _side.value is not null, set the previous side price to the current side price.
-
+        previousEntreePrice = _side.value?.price ?: 0.0
         // TODO: if _subtotal.value is not null subtract the previous side price from the current
         //  subtotal value. This ensures that we only charge for the currently selected side.
+        _subtotal.value = (_subtotal.value ?: 0.0) - previousEntreePrice
 
         // TODO: set the current side value to the menu item corresponding to the passed in string
+        _side.value = menuItems[side]
         // TODO: update the subtotal to reflect the price of the selected side.
+        updateSubtotal(menuItems[side]?.price ?: 0.0)
     }
 
     /**
@@ -98,33 +107,48 @@ class OrderViewModel : ViewModel() {
     fun setAccompaniment(accompaniment: String) {
         // TODO: if _accompaniment.value is not null, set the previous accompaniment price to the
         //  current accompaniment price.
+        previousEntreePrice = _accompaniment.value?.price ?: 0.0
 
         // TODO: if _accompaniment.value is not null subtract the previous accompaniment price from
         //  the current subtotal value. This ensures that we only charge for the currently selected
         //  accompaniment.
+        _subtotal.value = (_subtotal.value ?: 0.0) - previousEntreePrice
+
 
         // TODO: set the current accompaniment value to the menu item corresponding to the passed in
         //  string
+        _accompaniment.value = menuItems[accompaniment]
         // TODO: update the subtotal to reflect the price of the selected accompaniment.
+        updateSubtotal(menuItems[accompaniment]?.price ?: 0.0)
     }
 
     /**
      * Update subtotal value.
      */
     private fun updateSubtotal(itemPrice: Double) {
-        // TODO: if _subtotal.value is not null, update it to reflect the price of the recently
+        // TODOok: if _subtotal.value is not null, update it to reflect the price of the recently
         //  added item.
         //  Otherwise, set _subtotal.value to equal the price of the item.
+        if(_subtotal.value !=null){
+            _subtotal.value = (_subtotal.value)?.plus(itemPrice)
+        }else{
+            _subtotal.value = itemPrice
+            // TODOok: calculate the tax and resulting total
+            calculateTaxAndTotal()
+        }
 
-        // TODO: calculate the tax and resulting total
     }
 
     /**
      * Calculate tax and update total.
      */
     fun calculateTaxAndTotal() {
-        // TODO: set _tax.value based on the subtotal and the tax rate.
-        // TODO: set the total based on the subtotal and _tax.value.
+        // TODOok: set _tax.value based on the subtotal and the tax rate.
+        _tax.value = _subtotal.value?.times(taxRate)
+
+        // TODOok: set the total based on the subtotal and _tax.value.
+        _total.value =_subtotal.value?.plus(_tax.value ?: 0.0)
+
     }
 
     /**
@@ -132,5 +156,16 @@ class OrderViewModel : ViewModel() {
      */
     fun resetOrder() {
         // TODO: Reset all values associated with an order
+        previousEntreePrice = 0.0
+        previousSidePrice= 0.0
+        previousAccompanimentPrice= 0.0
+        _entree.value= null
+        _side.value= null
+        _accompaniment.value= null
+        _subtotal.value=0.0
+        _total.value= 0.0
+        _tax.value= 0.0
     }
+
+
 }
