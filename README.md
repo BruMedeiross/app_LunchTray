@@ -1,7 +1,7 @@
 Lunch Tray (solved code)
 ==================================
 
-StarterCode - for the third independent project for Android Basics in Kotlin
+InitialCommit - for the third independent project for Android Basics in Kotlin
 
 StartCommit - for solution
 
